@@ -18,3 +18,16 @@ jobs:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t devregistry0001.azurecr.io/hello_dotnet:latest .
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_ACI_LOGIN: "true"
+          DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
+          DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Push Docker Image to ACR
+        run: |
+          docker push devregistry0001.azurecr.io/hello_dotnet:lates
