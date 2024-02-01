@@ -1,11 +1,19 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as builder
+
+WORKDIR /app
+
+COPY . .
+
+RUN dotnet publish -c=Release -o=build
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine
 
 USER app
 
 WORKDIR /app
 
-COPY ./build .
+COPY --from=builder /app/build .
 
-EXPOSE 5000
+EXPOSE 8080
 
 ENTRYPOINT [ "dotnet", "hello_docker.dll" ]

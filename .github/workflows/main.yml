@@ -24,19 +24,21 @@ jobs:
 
       - name: Log in to Azure with Docker
         run: |
-          az acr login --name devregistry0001.azurecr.io
+          az acr login --name ${{ secrets.AZURE_REGISTRY }}
         env:
           DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
           DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_ACR: ${{ secrets.AZURE_REGISTRY }}
           
       - name: Build Docker Image
         run: |
-          docker build -t devregistry0001.azurecr.io/hello_docker . -f Dockerfile.dev
+          docker build -t ${{ secrets.AZURE_REGISTRY }}/hello_docker . -f Dockerfile.dev
         env:
           DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
           DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_ACR: ${{ secrets.AZURE_REGISTRY }}
 
 
       - name: Push Docker Image to ACR
         run: |
-          docker push devregistry0001.azurecr.io/hello_docker
+          docker push ${{ secrets.AZURE_REGISTRY }}/hello_docker
