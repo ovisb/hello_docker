@@ -14,21 +14,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Azure CLI login
-        run: |
-          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        env:
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      # - name: Azure CLI login
+      #   run: |
+      #     az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+      #   env:
+      #     AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      #     AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #     AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-      - name: Log in to Azure with Docker
-        run: |
-          az acr login --name ${{ secrets.AZURE_REGISTRY }}
-        env:
-          DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
-          DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_REGISTRY: ${{ secrets.AZURE_REGISTRY }}
+      # - name: Log in to Azure with Docker
+      #   run: |
+      #     az acr login --name ${{ secrets.AZURE_REGISTRY }}
+      #   env:
+      #     DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
+      #     DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #     AZURE_REGISTRY: ${{ secrets.AZURE_REGISTRY }}
           
       - name: Build Docker Image
         run: |
