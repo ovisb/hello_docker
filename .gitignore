@@ -1,4 +1,4 @@
 obj/
 bin/
 /build/
-,idea/
+.idea/
