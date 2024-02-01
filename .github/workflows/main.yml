@@ -28,15 +28,15 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
           DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_ACR: ${{ secrets.AZURE_REGISTRY }}
+          AZURE_REGISTRY: ${{ secrets.AZURE_REGISTRY }}
           
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.AZURE_REGISTRY }}/hello_docker . -f Dockerfile.dev
+          docker build -t ${{ secrets.AZURE_REGISTRY }}/hello_docker .
         env:
           DOCKER_USERNAME: ${{ secrets.AZURE_CLIENT_ID }}
           DOCKER_PASSWORD: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_ACR: ${{ secrets.AZURE_REGISTRY }}
+          AZURE_REGISTRY: ${{ secrets.AZURE_REGISTRY }}
 
 
       - name: Push Docker Image to ACR
